@@ -9,9 +9,9 @@
 
         function computerPlay() {
             var choices = [
-                'Rock',
-                'Paper',
-                'Scissors'
+                'rock',
+                'paper',
+                'scissors'
             ];
 
             // return random number out of 3
@@ -20,7 +20,44 @@
             return choices[randomNumber];
         }
 
-        console.log(computerPlay());
+        // testing computer input
+        // console.log(computerPlay());
+
+        function playerPlay() {
+            var input = window.prompt("Choose rock, paper or scissors");
+            input = input.toLowerCase();
+
+            // loop until user enters a valid input
+            while (input != "rock" && input != "paper" && input != "scissors") {
+                input = window.prompt("Enter a valid option: rock paper or scissors!");
+                input = input.toLowerCase();
+            } 
+            return input;
+        }
+
+        // testing player input
+        // console.log(playerPlay());
+
+        var playerSelection = playerPlay();
+        var computerSelection = computerPlay();
+
+        var playerScore = 0;
+        var computerScore = 0;
+
+        function game(playerChoice, compChoice) {
+            if(playerChoice == "rock") {
+                if(compChoice == "rock") {
+                    console.log("Tie!");
+                    // no points
+                } else if (compChoice == "paper") {
+                    computerScore++;
+                    console.log("Comp wins");
+                } else if (compChoice == "scissors") {
+                    playerScore++;
+                    console.log("User winws");
+                }
+            }
+        }
     </script>
 </body>
 </html>
