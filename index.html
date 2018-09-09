@@ -38,13 +38,11 @@
         // testing player input
         // console.log(playerPlay());
 
-        var playerSelection = playerPlay();
-        var computerSelection = computerPlay();
 
         var playerScore = 0;
         var computerScore = 0;
 
-        function game(playerChoice, compChoice) {
+        function playRound(playerChoice, compChoice) {
             if(playerChoice == "rock") {
                 if(compChoice == "rock") {
                     console.log("Tie!");
@@ -54,10 +52,55 @@
                     console.log("Comp wins");
                 } else if (compChoice == "scissors") {
                     playerScore++;
-                    console.log("User winws");
+                    console.log("User wins");
+                }
+            } else if(playerChoice == "paper") {
+                if(compChoice == "rock") {
+                    playerScore++;
+                    console.log("User wins");
+                } else if (compChoice == "paper") {
+                    console.log("Tie");
+                    // no points
+                } else if (compChoice == "scissors") {
+                    computerScore++;
+                    console.log("Comp wins");
+                }
+            } else if(playerChoice == "scissors") {
+                if(compChoice == "rock") {
+                    computerScore++;
+                    console.log("Comp wins");
+                } else if (compChoice == "paper") {
+                    playerScore++;
+                    console.log("User wins");
+                } else if (compChoice == "scissors") {
+                    console.log("Tie");
+                    // no points
                 }
             }
+            
+            console.log("User: " + playerScore + ", Computer: " + computerScore);
         }
+
+        function game() {
+            var playerSelection;
+            var computerSelection;
+            while (playerScore < 5 && computerScore < 5) {
+                playerSelection = playerPlay();
+                computerSelection = computerPlay();
+
+                playRound(playerSelection, computerSelection); 
+            }
+
+            if (playerScore == 5) {
+                console.log("User wins the game!");
+            } else {
+                console.log("Computer wins the game!");
+            }
+        }
+
+        // play the game!
+        game();
+
     </script>
 </body>
 </html>
