@@ -1,5 +1,3 @@
-let playerSelection = "rock";
-
 function getComputerChoice() {
     let randomNum  = Math.floor(Math.random() * 3) + 1;
     let computerChoice;
@@ -12,18 +10,26 @@ function getComputerChoice() {
         computerChoice = "Scissors";
     }
 
-    // console.log(computerChoice);
     return computerChoice;
 }
 
-
 function getPlayerChoice() {
+    // get user input the first time
+    let userInput = prompt("Choose Rock Paper or Scissors");
+    userInput = userInput.trim().toLowerCase();
+    
+    // if invalid input, keep asking for proper input
+    while (!(userInput == "rock" || userInput == "paper" || userInput == "scissors")) {
+        userInput = prompt("Invalid input! ONLY Choose Rock Paper or Scissors");
+        userInput = userInput.trim().toLowerCase();
+    }
 
+    return userInput;
 }
 
 function playRound(playerSelection, computerSelection) {
-    console.log("the player picked " + playerSelection);
-    console.log("the computer picked " + computerSelection.toLowerCase());
+    console.log("The player picked " + playerSelection);
+    console.log("The computer picked " + computerSelection.toLowerCase());
 
     let playerPick = playerSelection.toLowerCase();
     let compPick = computerSelection.toLowerCase();
@@ -31,27 +37,27 @@ function playRound(playerSelection, computerSelection) {
 
     if (playerPick == "rock") {
         if(compPick == "rock") {
-            winnerText = "you tied!";
+            winnerText = "You tied!";
         } else if (compPick == "paper") {
-            winnerText = "you lose! paper beats rock";
+            winnerText = "You lose! Paper beats rock!";
         } else if (compPick == "scissors") {
-            winnerText = "you win! rock beats scissors";
+            winnerText = "You win! Rock beats scissors!";
         }
     } else if (playerPick == "paper") {
         if(compPick == "rock") {
-            winnerText = "you win! paper beats rock";
+            winnerText = "You win! Paper beats rock!";
         } else if (compPick == "paper") {
-            winnerText = "you tied!";
+            winnerText = "You tied!";
         } else if (compPick == "scissors") {
-            winnerText = "you lose! scissors beats paper";
+            winnerText = "You lose! Scissors beats paper!";
         }
     } else if (playerPick == "scissors") {
         if(compPick == "rock") {
-            winnerText = "you lose! rock beats scissors";
+            winnerText = "You lose! Rock beats scissors!";
         } else if (compPick == "paper") {
-            winnerText = "you win! scissors beats paper";
+            winnerText = "You win! Scissors beats paper!";
         } else if (compPick == "scissors") {
-            winnerText = "you tied!";
+            winnerText = "You tied!";
         }
     }
 
@@ -63,37 +69,30 @@ function playGame() {
     let compScore = 0;
 
     for(let i = 0; i < 5; i++) {
+        console.log("ROUND " + (i + 1));
         const computerSelection = getComputerChoice();
-        let userInput = prompt("Choose Rock Paper or Scissors");
+        const playerSelection = getPlayerChoice();
 
-        userInput = userInput.toLowerCase();
-        if (userInput == "rock" || userInput == "paper" || userInput == "scissors") {
-            playerSelection = userInput;
-        } else {
-            userInput = prompt("Invalid input! Choose ONLY Rock Paper or Scissors!")
-        }
-            
         let winner = playRound(playerSelection, computerSelection);
         if (winner.includes("win")) {
-            console.log("wow you won a round, neat");
+            console.log(winner);
             playerScore++;
         } else if (winner.includes("lose")) {
-            console.log("ha you lost a round");
+            console.log(winner);
             compScore++;
         } else {
-            console.log("yall tied a round. no points for either of you");
+            console.log(winner);
         }
-        console.log("player has " + playerScore + " points. computer has " + compScore + " points.")
+        console.log("Player has " + playerScore + " points. Computer has " + compScore + " points.")
     }
 
     if (playerScore > compScore) {
-        console.log("you won the game!");
+        console.log("You won the game! Now go outside.");
     } else if (playerScore < compScore) {
-        console.log("you lost the game!")
+        console.log("You lost the game! Now go outside.")
     } else {
-        console.log("well well, you tied");
+        console.log("Well well, you tied Now go outside.");
     }
 }
 
 playGame();
-// console.log(playRound(playerSelection, computerSelection));
